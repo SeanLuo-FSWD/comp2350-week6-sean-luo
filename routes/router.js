@@ -1,36 +1,20 @@
 const router = require("express").Router();
-const database = include("databaseConnection");
-const dbModel = include("databaseAccessLayer");
-const posts = require("./FakeDb/posts");
+// const database = include("databaseConnection");
+// const dbModel = include("databaseAccessLayer");
+// const posts = require("./FakeDb/posts");
 //const dbModel = include('staticData');
 
 router.get("/", (req, res) => {
-  console.log("page hit");
-  database.getConnection(function (err, dbConnection) {
-    if (err) {
-      res.render("error", { message: "Error connecting to MySQL" });
-      console.log("Error connecting to mysql");
-      console.log(err);
-    } else {
-      dbModel.getAllUsers((err, result) => {
-        if (err) {
-          res.render("error", { message: "Error reading from MySQL" });
-          console.log("Error reading from mysql");
-          console.log(err);
-        } else {
-          //success
-          res.render("index", { allUsers: result });
-
-          //Output the results of the query to the Heroku Logs
-          console.log(result);
-        }
-      });
-      dbConnection.release();
-    }
-  });
+  res.status(200).json(posts);
 });
 
-const post1s = [
+router.get("/ts/posts", (req, res) => {
+  console.log("stopper stopper stopper stopper");
+  console.log(posts);
+  res.status(200).json(posts);
+});
+
+const posts = [
   {
     postId: 5,
     userName: "john",
@@ -59,11 +43,5 @@ const post1s = [
     commentList: [],
   },
 ];
-
-router.get("/ts/posts", (req, res) => {
-  // res.status(200).json(posts);
-  console.log("stopper stopper stopper stopper");
-  console.log(posts);
-});
 
 module.exports = router;
