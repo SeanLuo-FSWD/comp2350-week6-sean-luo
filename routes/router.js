@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const database = include("databaseConnection");
 const dbModel = include("databaseAccessLayer");
+const posts = include("./FakeDb/posts");
 //const dbModel = include('staticData');
 
 router.get("/", (req, res) => {
@@ -27,6 +28,10 @@ router.get("/", (req, res) => {
       dbConnection.release();
     }
   });
+});
+
+router.get("/ts/posts", (req, res) => {
+  res.status(200).json(posts);
 });
 
 module.exports = router;
