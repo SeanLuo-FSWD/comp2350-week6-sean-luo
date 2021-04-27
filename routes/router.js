@@ -30,8 +30,15 @@ router.get("/", (req, res) => {
   });
 });
 
-// router.get("/ts/posts", (req, res) => {
-//   res.status(200).json(posts);
-// });
+router.get("/ts/posts", (req, res) => {
+  res.status(200).json({
+    postId: 5,
+    userName: "john",
+    createdAt: new Date(),
+    message: "Hi there",
+    comments: "4",
+    likes: "2",
+  });
+});
 
 module.exports = router;
