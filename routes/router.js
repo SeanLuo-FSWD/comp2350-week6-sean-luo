@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const database = include("databaseConnection");
 const dbModel = include("databaseAccessLayer");
-// const posts = require("./FakeDb/posts");
+const posts = require("./FakeDb/posts");
 //const dbModel = include('staticData');
 
 router.get("/", (req, res) => {
@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
   });
 });
 
-const posts = [
+const post1s = [
   {
     postId: 5,
     userName: "john",
@@ -61,7 +61,9 @@ const posts = [
 ];
 
 router.get("/ts/posts", (req, res) => {
-  res.status(200).json(posts);
+  // res.status(200).json(posts);
+  console.log("stopper stopper stopper stopper");
+  console.log(posts);
 });
 
 module.exports = router;
