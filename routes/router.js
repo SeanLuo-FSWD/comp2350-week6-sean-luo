@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const database = include("databaseConnection");
 const dbModel = include("databaseAccessLayer");
-const posts = include("./FakeDb/posts");
+const posts = require("./FakeDb/posts");
 //const dbModel = include('staticData');
 
 router.get("/", (req, res) => {
