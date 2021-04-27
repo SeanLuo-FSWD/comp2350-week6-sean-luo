@@ -10,7 +10,7 @@ global.include = function (file) {
 const express = require("express");
 // const database = include("databaseConnection");
 const router = include("routes/router");
-
+const cors = require("cors");
 const port = process.env.PORT || 8080;
 
 // database.getConnection((err, dbConnection) => {
@@ -25,17 +25,18 @@ const port = process.env.PORT || 8080;
 const app = express();
 app.set("view engine", "ejs");
 
+app.use(cors());
 app.use("/", router);
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   next();
+// });
 app.listen(port, () => {
   console.log("Node application listening on port " + port);
 });
