@@ -11,6 +11,8 @@ const express = require("express");
 // const database = include("databaseConnection");
 const router = include("routes/router");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+const jsonParser = bodyParser.json();
 const port = process.env.PORT || 8080;
 
 // database.getConnection((err, dbConnection) => {
@@ -26,6 +28,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(cors());
+app.use(jsonParser);
 app.use("/", router);
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: false }));
