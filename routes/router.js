@@ -37,15 +37,15 @@ router.post("/ts/add_comment", (req, res) => {
   res.status(200).json(req.body);
 });
 
-const posts = [
+const posts2 = [
   {
-    postId: 5,
+    postId: "5",
     userName: "john",
     createdAt: new Date(),
     message: "Hi there",
     likes: [
-      { userId: 1, username: "john" },
-      { userId: 2, username: "jack" },
+      { userId: "1", username: "john" },
+      { userId: "2", username: "jack" },
     ],
     commentList: [
       {
@@ -114,6 +114,109 @@ const posts = [
         commentId: uuidv4(),
         userId: uuidv4(),
         username: "bbb",
+        createdAt: new Date(),
+        message: "bbb comment",
+      },
+    ],
+  },
+];
+
+const posts = [
+  {
+    id: "5",
+    userName: "john",
+    createdAt: new Date(),
+    message: "Hi there",
+    likes: [
+      {
+        id: "l51",
+        userId: "1",
+        postId: "5",
+        username: "john",
+      },
+      { id: "l52", userId: 2, username: "jack", postId: "5" },
+    ],
+    commentList: [
+      {
+        id: "c51",
+        userId: "1",
+        username: "john",
+        createdAt: new Date(),
+        message: "john comment 1",
+        postId: "5",
+      },
+      {
+        id: "c52",
+        userId: "2",
+        username: "aaa",
+        createdAt: new Date(),
+        message: "aaa comment",
+        postId: "5",
+      },
+      {
+        id: "c53",
+        userId: "3",
+        username: "bbb",
+        createdAt: new Date(),
+        message: "bbb comment",
+        postId: "5",
+      },
+    ],
+  },
+  {
+    id: "4",
+    userName: "john2",
+    createdAt: new Date(),
+    message: "this is a new post by me",
+    likes: [
+      {
+        id: "l41",
+        userId: "1",
+        postId: "4",
+        username: "john",
+      },
+      { id: "l42", userId: 2, postId: "4", username: "jack" },
+      { id: "l43", userId: 3, postId: "4", username: "nonexist" },
+    ],
+    commentList: [
+      {
+        id: "c41",
+        userId: "1",
+        username: "john",
+        createdAt: new Date(),
+        message: "john comment 1",
+        postId: "5",
+      },
+    ],
+  },
+  {
+    id: "3",
+    userName: "josh",
+    createdAt: new Date(),
+    message: "Josh first post",
+    likes: [
+      {
+        id: "l31",
+        userId: "1",
+        postId: "3",
+        username: "john",
+      },
+      { id: "l32", userId: 2, postId: "3", username: "jack" },
+    ],
+    commentList: [
+      {
+        id: "c32",
+        userId: "2",
+        username: "aaa",
+        postId: "5",
+        createdAt: new Date(),
+        message: "aaa comment",
+      },
+      {
+        id: "c33",
+        userId: "3",
+        username: "bbb",
+        postId: "5",
         createdAt: new Date(),
         message: "bbb comment",
       },
