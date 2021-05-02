@@ -4,6 +4,7 @@ const router = require("express").Router();
 // const posts = require("./FakeDb/posts");
 //const dbModel = include('staticData');
 const { v4: uuidv4 } = require("uuid");
+const formidable = require("formidable");
 
 router.get("/", (req, res) => {
   res.status(200).json(posts);
@@ -37,96 +38,44 @@ router.post("/ts/add_comment", (req, res) => {
   res.status(200).json(req.body);
 });
 
-const posts2 = [
-  {
-    postId: "5",
-    userName: "john",
-    createdAt: new Date(),
-    message: "Hi there",
-    likes: [
-      { userId: "1", username: "john" },
-      { userId: "2", username: "jack" },
-    ],
-    commentList: [
-      {
-        commentId: uuidv4(),
-        userId: 1,
-        username: "john",
+router.post("/ts/create_post", (req, res) => {
+  const form = formidable({ multiples: true });
+
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      console.log("err " + err);
+    } else {
+      console.dir(fields);
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+      // console.log(files);
+      console.log(files["filesToUpload[]"]);
+
+      res.status(200).json({
+        id: fields.id,
+        userId: fields.userId,
+        message: fields.message,
         createdAt: new Date(),
-        message: "john comment 1",
-      },
-      {
-        commentId: uuidv4(),
-        userId: uuidv4(),
-        username: "aaa",
-        createdAt: new Date(),
-        message: "aaa comment",
-      },
-      {
-        commentId: uuidv4(),
-        userId: uuidv4(),
-        username: "bbb",
-        createdAt: new Date(),
-        message: "bbb comment",
-      },
-    ],
-  },
-  {
-    postId: 4,
-    userName: "john2",
-    createdAt: new Date(),
-    message: "this is a new post by me",
-    likes: [
-      { userId: 1, username: "john" },
-      { userId: 2, username: "jack" },
-      { userId: 3, username: "bob" },
-      { userId: 4, username: "alice" },
-    ],
-    commentList: [
-      {
-        commentId: uuidv4(),
-        userId: uuidv4(),
-        username: "ccc",
-        createdAt: new Date(),
-        message: "ccc comment 1",
-      },
-    ],
-  },
-  {
-    postId: 3,
-    userName: "josh",
-    createdAt: new Date(),
-    message: "Josh first post",
-    likes: [
-      { userId: 1, username: "john" },
-      { userId: 2, username: "jack" },
-      { userId: 4, username: "alice" },
-    ],
-    commentList: [
-      {
-        commentId: uuidv4(),
-        userId: uuidv4(),
-        username: "aaa",
-        createdAt: new Date(),
-        message: "aaa comment",
-      },
-      {
-        commentId: uuidv4(),
-        userId: uuidv4(),
-        username: "bbb",
-        createdAt: new Date(),
-        message: "bbb comment",
-      },
-    ],
-  },
-];
+        likes: [],
+        commentList: [],
+        img_urls: [
+          "https://idsp2.s3-us-west-1.amazonaws.com//images/1619930874561_07_optional_middle_name_1.png",
+          "http://www.saltysfishandchips.ca/images/fish_chips.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/VAN_CAT.png/1024px-VAN_CAT.png",
+          "https://i.pinimg.com/564x/87/3e/e1/873ee1a06a0e1fa2f49918322d77b658.jpg",
+        ],
+      });
+    }
+  });
+});
 
 const posts = [
   {
     id: "5",
     userName: "john",
     createdAt: new Date(),
-    message: "Hi there",
+    title: "Lorem, ipsum dolor ",
+    message:
+      "sit amet consectetur adipisicing elit. Maxime deserunt debitis voluptatem modi commodi nostrum officiis minima ut ipsa harum temporibus eum, asperiores soluta, repudiandae qui culpa vel sit dolores.",
     likes: [
       {
         id: "l51",
@@ -165,9 +114,11 @@ const posts = [
   },
   {
     id: "4",
+    title: "super post",
     userName: "john2",
     createdAt: new Date(),
-    message: "this is a new post by me",
+    message:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime deserunt debitis voluptatem modi commodi nostrum officiis minima ut ipsa harum temporibus eum, asperiores soluta, repudiandae qui culpa vel sit dolores.",
     likes: [
       {
         id: "l41",
@@ -192,8 +143,11 @@ const posts = [
   {
     id: "3",
     userName: "josh",
+    title: "title post 2 lorem",
     createdAt: new Date(),
-    message: "Josh first post",
+
+    message:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime deserunt debitis voluptatem modi commodi nostrum officiis minima ut ipsa harum temporibus eum, asperiores soluta, repudiandae qui culpa vel sit dolores.",
     likes: [
       {
         id: "l31",
