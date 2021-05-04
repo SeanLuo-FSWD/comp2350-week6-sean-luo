@@ -28,9 +28,15 @@ const formidable = require("express-formidable");
 const app = express();
 app.set("view engine", "ejs");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    credentials: true,
+  })
+);
 // app.use(formidable());
-// app.use(jsonParser);
+app.use(jsonParser);
 app.use("/", router);
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
